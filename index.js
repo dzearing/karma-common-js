@@ -48,9 +48,9 @@ function createPreprocessor(config, basePath, logger) {
 
     var wrapperHead =
       'window.__cjsModules = window.__cjsModules || {};' +
-      'window.__cjsModules["' + file.originalPath + '"] = ' +
+      'window.__cjsModules[' + JSON.stringify(file.originalPath) + '] = ' +
         'function (require, module, exports, global, __filename, __dirname, process) {';
-    var wrapperFoot = '\n};window.__cjsModules["' + file.originalPath + '"].autostart = ' + shouldAutoStart(file.originalPath);
+    var wrapperFoot = '\n};window.__cjsModules[' + JSON.stringify(file.originalPath) + '].autostart = ' + shouldAutoStart(file.originalPath);
 
     // If the file is something other than a .js file, we have
     // to add .js to make Karma serve it as a js file.
@@ -107,9 +107,10 @@ function createPreprocessor(config, basePath, logger) {
             // we need to know the physical path to the jquery file.
             aliases +=
               'window.__cjsModuleAliases = window.__cjsModuleAliases || {};' +
-              'window.__cjsModuleAliases["' + moduleName + '"] = "' + modulePath + '";';
+              'window.__cjsModuleAliases[' + JSON.stringify(moduleName) + '] = ' + JSON.stringify(modulePath) + ';';
           }
         }
+        
         log.debug('Replacing require "%s" with "%s"', moduleName, modulePath);
       } catch (e) {
         modulePath = moduleName;
@@ -154,7 +155,8 @@ function createPreprocessor(config, basePath, logger) {
           });
         });
       }
-      return match.replace(/require\(.*?\)/, 'require("' + modulePath + '")');
+            
+      return match.replace(/require\(.*?\)/, 'require(' + JSON.stringify(modulePath) + ')');
     }
 
     var processedContent = content;
@@ -199,7 +201,7 @@ function createPreprocessor(config, basePath, logger) {
     if (/\.json$/.test(file.originalPath)) {
       processedContent = 'module.exports = ' + processedContent;
     } else {
-      processedContent = processedContent.replace(/^(?!\s*[\/\/|\*]).*require\(["']([^\)]+)["'][,\)]/mg, replaceModuleName);
+      processedContent = processedContent.replace(/require\(['"]([^'"]*)['"]\)/mg, replaceModuleName);
     }
 
     wrappedContent = aliases + wrapperHead + processedContent + wrapperFoot;
