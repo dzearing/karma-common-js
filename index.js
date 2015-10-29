@@ -116,6 +116,10 @@ function createPreprocessor(config, basePath, logger) {
         log.debug('Replacing require "%s" with "%s"', moduleName, modulePath);
       }
 
+      // For Windows, replace the backslashes resolved from within the modulePath to
+      // forward slashes for slash normalization.      
+      modulePath = modulePath.replace(/\\/g, '/');
+
       // Since you don't want to specify your npm modules in karma.conf.js, we check
       // for a node_modules folder in it's path. If we see it, it means that
       // we have to call `process()` on in because Karma won't call `process()` for
