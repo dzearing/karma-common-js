@@ -1,6 +1,6 @@
 {
   "name": "karma-common-js-private",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Test CommonJS modules without using Browserify",
   "main": "index.js",
   "author": {
@@ -10,7 +10,12 @@
     "type": "git",
     "url": "https://github.com/dzearing/karma-common-js"
   },
-  "keywords": ["karma", "commonjs", "browserify", "test"],
+  "keywords": [
+    "karma",
+    "commonjs",
+    "browserify",
+    "test"
+  ],
   "dependencies": {
     "browser-builtins-private": "^3.2.0",
     "minimatch": "^1.0.0",
