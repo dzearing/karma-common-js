@@ -12,7 +12,7 @@
   },
   "keywords": ["karma", "commonjs", "browserify", "test"],
   "dependencies": {
-    "browser-builtins": "^3.2.0",
+    "browser-builtins-private": "^3.2.0",
     "minimatch": "^1.0.0",
     "resolve": "^1.0.0"
   },
