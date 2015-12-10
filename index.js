@@ -4,7 +4,7 @@ var path = require('path');
 var fs = require('fs');
 var resolve = require('resolve');
 var minimatch = require('minimatch');
-var browserBuiltins = require('browser-builtins');
+var browserBuiltins = require('browser-builtins-private');
 
 var startClientFile = path.normalize(__dirname + '/start-client.js');
 
@@ -110,7 +110,7 @@ function createPreprocessor(config, basePath, logger) {
               'window.__cjsModuleAliases[' + JSON.stringify(moduleName) + '] = ' + JSON.stringify(modulePath) + ';';
           }
         }
-        
+
         log.debug('Replacing require "%s" with "%s"', moduleName, modulePath);
       } catch (e) {
         modulePath = moduleName;
@@ -118,7 +118,7 @@ function createPreprocessor(config, basePath, logger) {
       }
 
       // For Windows, replace the backslashes resolved from within the modulePath to
-      // forward slashes for slash normalization.      
+      // forward slashes for slash normalization.
       modulePath = modulePath.replace(/\\/g, '/');
 
       // Since you don't want to specify your npm modules in karma.conf.js, we check
@@ -155,7 +155,7 @@ function createPreprocessor(config, basePath, logger) {
           });
         });
       }
-            
+
       return match.replace(/require\(.*?\)/, 'require(' + JSON.stringify(modulePath) + ')');
     }
 
