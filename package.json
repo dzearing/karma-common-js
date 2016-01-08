@@ -1,6 +1,6 @@
 {
   "name": "@ms/karma-common-js",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Test CommonJS modules without using Browserify",
   "main": "index.js",
   "author": {
@@ -17,7 +17,7 @@
     "test"
   ],
   "dependencies": {
-    "browser-builtins-private": "^3.2.0",
+    "@ms/browser-builtins": "^3.2.0",
     "minimatch": "^1.0.0",
     "resolve": "^1.0.0"
   },
