@@ -4,7 +4,7 @@ var path = require('path');
 var fs = require('fs');
 var resolve = require('resolve');
 var minimatch = require('minimatch');
-var browserBuiltins = require('browser-builtins-private');
+var browserBuiltins = require('@ms/browser-builtins');
 
 var startClientFile = path.normalize(__dirname + '/start-client.js');
 
